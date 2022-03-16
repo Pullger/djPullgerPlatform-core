@@ -45,10 +45,6 @@ except ImportError:
     from settings_secret_key import SECRET_KEY
 # <\neo>
 
-
-
-
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -102,19 +98,32 @@ TEMPLATES = [
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'HOST': 'localhost',
-        'NAME': 'MDP_39jnu6',
-        #'USER': 'username',
-        #'PASSWORD': 'querty'
-        'USER': 'MDP_39jnu6_usr',
-        'PASSWORD': '3n5UehPD79'
-        #'USER': 'vector',
-        #'PASSWORD': 'ghbvf'
-    }
-}
+
+# <neo> [Generate databases]
+# DATABASES =
+# <\old>
+# <new>
+def generate_databases(filepath):
+
+    databases_file = open(filepath, "w");
+    databases_file = "DATABASES = { 'default': { " + '\n';
+    databases_file = databases_file + "'ENGINE': 'django.db.backends.postgresql'," + '\n';
+    databases_file = databases_file + "'HOST': 'localhost'," + '\n';
+    databases_file = databases_file + "'NAME': 'MDP_39jnu6'," + '\n';
+    databases_file = databases_file + "'USER': 'MDP_39jnu6_usr'," + '\n';
+    databases_file = databases_file + "'PASSWORD': '3n5UehPD79'" + '\n';
+    databases_file.write(databases_file);
+    databases_file.close();
+try:
+    from settings_databases import DATABASES
+except ImportError:
+    import os
+
+    SETTINGS_DATABASES_DIR = os.path.abspath(os.path.dirname(__file__))
+    generate_secret_key(os.path.join(SETTINGS_DATABASES_DIR, 'settings_databases.py'))
+
+    from settings_databases import DATABASES
+# <\neo>
 
 
 # Password validation
