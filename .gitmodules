@@ -1,4 +1,1 @@
-[submodule "djTaskBrocker"]
-	path = djTaskBrocker
-	url = git@github.com:TaskBrocker/djTaskBrocker.git
-	branch = dev-NeoUKR
+
