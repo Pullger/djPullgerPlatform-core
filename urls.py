@@ -19,6 +19,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls)
     #,path('test/', include('reglament_test.urls'))
-    ,path('bookingtest/', include('booking_com.urls'))
+    ,path('bookingtest/', include('djPullgerReflection.com_booking.urls'))
     #,path('test/', views.index())
     ]

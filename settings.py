@@ -60,8 +60,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'djTaskBrocker',
-    'booking_com'
+    'djPullgerReflection.com_booking',
+    'djTaskBrocker'
 ]
 
 MIDDLEWARE = [
@@ -104,15 +104,24 @@ TEMPLATES = [
 # <\old>
 # <new>
 def generate_databases(filepath):
-
     databases_file = open(filepath, "w");
-    databases_file = "DATABASES = { 'default': { " + '\n';
-    databases_file = databases_file + "'ENGINE': 'django.db.backends.postgresql'," + '\n';
-    databases_file = databases_file + "'HOST': 'localhost'," + '\n';
-    databases_file = databases_file + "'NAME': 'MDP_39jnu6'," + '\n';
-    databases_file = databases_file + "'USER': 'MDP_39jnu6_usr'," + '\n';
-    databases_file = databases_file + "'PASSWORD': '3n5UehPD79'" + '\n';
-    databases_file.write(databases_file);
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+
+    databases = "DATABASES = { 'default': { " + '\n';
+    databases = databases + "'ENGINE': 'django.db.backends.postgresql'," + '\n';
+    databases = databases + "#'HOST': 'localhost'," + '\n';
+    databases = databases + "#'NAME': ''," + '\n';
+    databases = databases + "'NAME': BASE_DIR / 'db.sqlite3'" + '\n';
+    databases = databases + "#'USER': ''," + '\n';
+    databases = databases + "#'PASSWORD': ''" + '\n';
+    databases = databases + "}}";
+    databases_file.write(databases);
     databases_file.close();
 try:
     from settings_databases import DATABASES
@@ -120,7 +129,7 @@ except ImportError:
     import os
 
     SETTINGS_DATABASES_DIR = os.path.abspath(os.path.dirname(__file__))
-    generate_secret_key(os.path.join(SETTINGS_DATABASES_DIR, 'settings_databases.py'))
+    generate_databases(os.path.join(SETTINGS_DATABASES_DIR, 'settings_databases.py'))
 
     from settings_databases import DATABASES
 # <\neo>
