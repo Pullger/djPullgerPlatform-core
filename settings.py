@@ -60,7 +60,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'djPullgerReflection.com_booking',
     'djTaskBrocker'
 ]
 
@@ -106,15 +105,9 @@ TEMPLATES = [
 def generate_databases(filepath):
     databases_file = open(filepath, "w");
 
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-
     databases = "DATABASES = { 'default': { " + '\n';
-    databases = databases + "'ENGINE': 'django.db.backends.postgresql'," + '\n';
+    databases = databases + "'ENGINE': 'django.db.backends.sqlite3'," + '\n';
+    databases = databases + "#'ENGINE': 'django.db.backends.postgresql'," + '\n';
     databases = databases + "#'HOST': 'localhost'," + '\n';
     databases = databases + "#'NAME': ''," + '\n';
     databases = databases + "'NAME': BASE_DIR / 'db.sqlite3'" + '\n';
